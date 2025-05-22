@@ -128,12 +128,6 @@ npm run dev
 
 ---
 
-## 📽 Demo and Screenshots
-
-> Add screen recordings and live API testing screenshots here (Postman or Swagger).
-
----
-
 ## 🧠 Author & License
 
 - **Author**: Muhammad Maaz
