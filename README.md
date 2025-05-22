@@ -1,113 +1,142 @@
 
-# SaasTellar - Real-Time Transcription Server
+# Backend - MERN Stack App with OpenAI Integration
 
-This is the backend server built with **Node.js** and **WebSocket** to provide real-time audio transcription using **Deepgram API**.
+This is the **backend** portion of a MERN stack application that includes OpenRouter API integration and a RESTful API for managing a collection of items.
 
-## Technologies Used
+## 🔧 Technologies Used
 
 - Node.js
 - Express.js
-- WebSocket (`ws`)
 - MongoDB (Mongoose)
-- Deepgram SDK
-- CORS
+- OpenAI API
 - dotenv
 
 ---
 
-## Project Setup
+## 📁 Project Structure
 
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/MaazSId44/Saastellar-backend.git
-cd backend-folder
+```
+backend/
+│
+├── config/
+│   └── connectdb.js              # MongoDB connection setup
+│
+├── controllers/
+│   ├── itemController.js         # CRUD logic for items
+│   ├── openaiController.js       # OpenAI integration logic
+│
+├── middlewares/
+│   ├── trycatch.js               # Async error handler middleware
+│   └── validations.js            # Input validation
+│
+├── models/
+│   └── item.js                   # Mongoose schema for item
+│
+├── routes/
+│   ├── itemRoutes.js             # Routes for item endpoints
+│   └── openaiRoutes.js           # Routes for OpenAI endpoint
+│
+├── services/                     # (Optional) Service layer
+├── utils/                        # (Optional) Utility functions
+│
+├── .env                          # Environment variables (API keys, DB URI)
+├── server.js                     # Entry point
+└── README.md
 ```
 
 ---
 
-### 2. Install dependencies
+## 📦 Installation
+
+1. Clone the repository and navigate to the backend directory:
+
+```bash
+git clone https://github.com/MaazSId44/openAI-backend.git
+cd backend
+```
+
+2. Install dependencies:
 
 ```bash
 npm install
 ```
 
----
+3. Create a `.env` file in the root with the following variables:
 
-### 3. Environment Variables
-
-Create a `.env` file in the root of your backend folder and add the following:
-
-```env
-PORT=8000
-DATABASE_URL=""
-BASE_URL=""
-DEEPGRAM_API_KEY=""
+```
+PORT=5000
+DATABASE_URL=your_mongo_connection_string
+BASE_URL=Your_base_url
+OPENROUTER_API_KEY=your_openRouter_api_key
 ```
 
----
-
-### 4. Running the Server
+4. Start the development server:
 
 ```bash
 npm run dev
 ```
-or
 
-```bash
-node server.js
+---
+
+## 🚀 API Endpoints
+
+### Item Routes (`/items`)
+| Method | Endpoint       | Description                  |
+|--------|----------------|------------------------------|
+| GET    | /items         | Get all items                |
+| POST   | /items         | Add a new item               |
+| DELETE | /items/:id     | Delete an item by ID         |
+
+#### Item Structure
+```json
+{
+  "name": "Sample Item",
+  "description": "This is a test item."
+}
 ```
 
 ---
 
-## Folder Structure
+### OpenAI Integration (`/generate`)
 
-```
-├── config/
-│   └── connectdb.js          # MongoDB connection setup
-├── controllers/
-│   └── websocketController.js # WebSocket handling logic
-├── services/
-│   └── deepgramService.js     # Deepgram client service
-├── utils/
-│   └── getReplyFromScript.js  # Scripted replies based on user speech
-├── staticReplies.js           # Predefined responses
-├── public/                    # Static files (optional)
-├── index.js                   # Server entry point
-├── .env                        # Environment variables
-└── package.json
+| Method | Endpoint     | Description                           |
+|--------|--------------|---------------------------------------|
+| POST   | /generate    | Send prompt and receive AI response   |
+
+#### Request Body
+```json
+{
+  "prompt": "Write a short story about a robot."
+}
 ```
 
----
-
-## Features
-
-- WebSocket server for real-time audio streaming.
-- Audio data forwarded to Deepgram for live transcription.
-- Automatic replies based on keywords matched from user's speech.
-- MongoDB integration (prepared).
-- Single active WebSocket connection enforced (only one client at a time).
+#### Response Example
+```json
+{
+  "response": "Once upon a time..."
+}
+```
 
 ---
 
-## Important Scripts
+## ✅ Best Practices Followed
 
-- `index.js`: Initializes Express server, WebSocket server, and MongoDB.
-- `websocketController.js`: Manages WebSocket connection and Deepgram integration.
-- `deepgramService.js`: Configures Deepgram client.
-- `getReplyFromScript.js`: Matches user input to predefined scripted replies.
-
----
-
-## Requirements
-
-- Node.js >= 14
-- MongoDB running instance
-- Deepgram API Key
+- Modularized code structure (controllers, models, routes, etc.)
+- Error handling via middlewares
+- Environment variables for sensitive configs
+- Validation logic separated from business logic
 
 ---
 
-## License
+## 📽 Demo and Screenshots
 
-This project is licensed under the MIT License.
+> Add screen recordings and live API testing screenshots here (Postman or Swagger).
 
+---
+
+## 🧠 Author & License
+
+- **Author**: Muhammad Maaz
+- **License**: MIT
+
+---s
